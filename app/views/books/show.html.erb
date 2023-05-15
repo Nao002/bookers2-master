@@ -1,0 +1,33 @@
+<%= render 'users/list', user: @user, book: @book_new %>
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+
+        <table class="table table-inverse">
+
+         <tbody>
+                <tr>
+                  <td>
+                    <%= link_to user_path(@user.id) do %>
+                    <% if @user.profile_image.attached? %>
+                      <%= image_tag @user.profile_image, size: "100x100", style: "height: auto;" %>
+                    <% else %>
+                      <%= image_tag 'no_image', size: "100x100" %>
+                    <% end %>
+                    <br>
+                    <%= @user.name %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to book_path(@book.id) do %>
+                      <%= @book.title %>
+                    <% end %>
+                  </td>
+                  <td><%= @book.body %></td>
+                  <% if @book.user_id == current_user.id %>
+                    <td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-success" %></td>
+                    <td><%= link_to 'Destroy', book_path(@book[:id]), class: "btn btn-danger", method: :delete, "data-confirm" => "Are you sure?" %></td>
+                  <% end %>
+                </tr>
+         </tbody>
+        </table>
+</div>
